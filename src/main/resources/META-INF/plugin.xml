@@ -1,0 +1,54 @@
+<idea-plugin>
+    <id>info.galliano.idea.pionPlugin.IdeaPionPlugin</id>
+    <name>Pion Support</name>
+    <vendor email="christian@galliano.info" url="http://galliano.info">Christian Galliano</vendor>
+
+    <description><![CDATA[
+    Support for Pion framework / components.
+    <br/>
+    Templating:<br/>
+    - Template path completion<br/>
+    - Goto template file action<br/>
+    - Goto template usages action<br/>
+    - Passed template variables completion & type support<br/>
+    - Invalid template path inspection<br/>
+    ]]></description>
+
+    <depends>com.jetbrains.php</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <idea-version since-build="187.0"/>
+
+    <extensions defaultExtensionNs="com.jetbrains">
+        <php.typeProvider4
+                implementation="info.galliano.idea.pionPlugin.templating.variables.type.provider.VariableTypeProvider"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Templating -->
+        <psi.referenceContributor
+                implementation="info.galliano.idea.pionPlugin.templating.templates.rendering.files.reference.to.GotoTemplateFileReferenceContributor"/>
+        <fileBasedIndex
+                implementation="info.galliano.idea.pionPlugin.templating.templates.files.stub.index.TemplateFileStubsIndex"/>
+        <completion.contributor
+                implementationClass="info.galliano.idea.pionPlugin.templating.variables.completion.TemplateVariablesCompletionContributor"
+                language="PHP"/>
+        <gotoDeclarationHandler
+                implementation="info.galliano.idea.pionPlugin.templating.variables.gotoHandler.GotoTemplateVariableDeclarationHandler"/>
+        <localInspection
+                groupPath="PHP,Pion"
+                shortName="InvalidTemplateFilePathInspection"
+                displayName="Check view file path"
+                groupName="Templating"
+                enabledByDefault="true"
+                level="ERROR"
+                language="PHP"
+                implementationClass="info.galliano.idea.pionPlugin.templating.templates.rendering.files.path.inspections.InvalidTemplateFilePathInspection"
+        />
+        <codeInsight.lineMarkerProvider
+                language="PHP"
+                implementationClass="info.galliano.idea.pionPlugin.templating.templates.rendering.files.reference.from.GotoTemplateUsagesMarkerProvider"/>
+    </extensions>
+
+    <actions>
+    </actions>
+</idea-plugin>
