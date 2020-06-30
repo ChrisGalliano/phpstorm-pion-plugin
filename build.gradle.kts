@@ -1,4 +1,6 @@
 plugins {
+    `java-gradle-plugin`
+    `maven-publish`
     idea apply true
     id("org.jetbrains.intellij") version "0.4.21"
     java
@@ -46,5 +48,9 @@ tasks {
     }
     patchPluginXml {
         changeNotes(project.property("changeNotes").toString().replace("\n", "<br>\n"))
+    }
+    publishPlugin {
+        val publishToken = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
+        setToken(publishToken)
     }
 }
