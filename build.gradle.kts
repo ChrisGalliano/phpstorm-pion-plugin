@@ -48,6 +48,8 @@ tasks {
     }
     patchPluginXml {
         changeNotes(project.property("changeNotes").toString().replace("\n", "<br>\n"))
+        setSinceBuild("187.0")
+        setUntilBuild("201.*")
     }
     publishPlugin {
         val publishToken = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
