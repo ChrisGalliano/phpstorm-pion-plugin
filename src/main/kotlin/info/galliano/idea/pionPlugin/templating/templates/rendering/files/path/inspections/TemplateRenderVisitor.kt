@@ -1,10 +1,10 @@
-package info.galliano.idea.pionPlugin.templating.inspections
+package info.galliano.idea.pionPlugin.templating.templates.rendering.files.path.inspections
 
 import com.intellij.psi.PsiElement
 import com.jetbrains.php.lang.psi.elements.ClassReference
 import com.jetbrains.php.lang.psi.elements.MethodReference
 import com.jetbrains.php.lang.psi.elements.NewExpression
-import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
+import com.jetbrains.php.lang.psi.elements.impl.ConcatenationExpressionImpl
 import com.jetbrains.php.lang.psi.visitors.PhpElementVisitor
 import info.galliano.idea.pionPlugin.templating.rendering.methods.PionRenderingMethods
 import info.galliano.idea.pionPlugin.psi.method.defenition.MethodCallDefinition
@@ -26,7 +26,7 @@ class TemplateRenderVisitor(val callback: (call: MethodCallDefinition) -> Unit) 
     private fun visitRenderCall(parameters: Array<PsiElement>) {
         if (parameters.isNotEmpty()) {
             val parameter = parameters[0]
-            if (parameter is StringLiteralExpression) {
+            if (parameter is ConcatenationExpressionImpl) {
                 val methodCall = MethodCallDefinition.createFromArgument(parameter)
                 if (methodCall != null && methodCall.isCallTo(PionRenderingMethods.methods, parameter.getProject())) {
                     callback(methodCall)

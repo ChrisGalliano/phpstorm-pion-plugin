@@ -1,4 +1,4 @@
-package info.galliano.idea.pionPlugin.templating.inspections
+package info.galliano.idea.pionPlugin.templating.templates.rendering.files.path.inspections
 
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
@@ -7,9 +7,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.PsiManager
 import com.jetbrains.php.lang.PhpFileType
-import com.jetbrains.php.lang.psi.PhpPsiElementFactory
-import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
-import info.galliano.idea.pionPlugin.templating.templates.ids.constraints.TemplateId
 
 class CreateTemplateFileQuickFix(private val filePath: String) : LocalQuickFix {
     override fun getName(): String {
@@ -40,16 +37,6 @@ class CreateTemplateFileQuickFix(private val filePath: String) : LocalQuickFix {
                         )
                         if (initialBaseDir.findFile(file.name) == null) {
                             initialBaseDir.add(file)
-                        }
-                        val realFile = initialBaseDir.findFile(file.name)
-                        if (realFile != null) {
-                            psiElement.replace(
-                                PhpPsiElementFactory.createPhpPsiFromText(
-                                    project,
-                                    StringLiteralExpression::class.java,
-                                    """'${TemplateId(realFile, project).id}'"""
-                                )
-                            )
                         }
                     }
                 }

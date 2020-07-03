@@ -22,14 +22,15 @@ class GotoTemplateUsagesNavigationHandler(private val templateId: String) : Gutt
                     for (targetMethodCallDefinition in PionRenderingMethods.methods) {
                         val templateCallsParameters = MatchTemplateCallParametersPsiElementProcessor.match(
                             psiFile,
+                            virtualFile,
                             targetMethodCallDefinition
                         )
                         for (result in templateCallsParameters) {
-                            val resultElementTemplateId = result.templateIdElement.text.trim('\'').trim('"')
+                            val resultElementTemplateId = result.getTemplateId()
                             if (resultElementTemplateId == templateId) {
                                 relatesItems = relatesItems.plus(
                                     GotoTemplateUsageRelatedItem(
-                                        result.templateIdElement,
+                                        result.templatePathElement,
                                         psiFile
                                     )
                                 )

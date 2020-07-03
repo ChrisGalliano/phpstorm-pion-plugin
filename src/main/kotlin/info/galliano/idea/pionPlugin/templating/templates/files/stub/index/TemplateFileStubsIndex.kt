@@ -23,7 +23,7 @@ class TemplateFileStubsIndex : FileBasedIndexExtension<String, TemplateFileStub>
     override fun getName() = key
     override fun getKeyDescriptor() = myKeyDescriptor
     override fun getValueExternalizer() = ObjectStreamDataExternalizer<TemplateFileStub>()
-    override fun getVersion() = 4
+    override fun getVersion() = 5
     override fun dependsOnFileContent() = true
 
     companion object {
@@ -39,7 +39,7 @@ class TemplateFileStubsIndex : FileBasedIndexExtension<String, TemplateFileStub>
                 return@DataIndexer map
             }
 
-            for ((templateId, parameterList) in TemplateCallsParser(psiFile)) {
+            for ((templateId, parameterList) in TemplateCallsParser(psiFile, it.file)) {
                 val templateFileStub = map[templateId] ?: TemplateFileStub(templateId, relativePath)
                 val templateParameter = getMethodParameterPsiElementAt(parameterList)
                 if (templateParameter is ArrayCreationExpression) {
