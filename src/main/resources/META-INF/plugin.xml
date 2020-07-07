@@ -4,13 +4,12 @@
     <vendor email="christian@galliano.info" url="http://galliano.info">Christian Galliano</vendor>
 
     <description><![CDATA[
-    Support for Pion framework / components.
+    Support for <a href="https://github.com/ChrisGalliano/Pion">Pion framework</a> / components.
     <br/>
-    Templating:<br/>
-    - Template path completion<br/>
-    - Goto template file action<br/>
+    <br/>
+    Templating features:<br/>
     - Goto template usages action<br/>
-    - Passed template variables completion & type support<br/>
+    - Passed template variables completion & variables type support<br/>
     - Invalid template path inspection<br/>
     ]]></description>
 
