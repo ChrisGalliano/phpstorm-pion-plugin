@@ -7,7 +7,13 @@
     Support for <a href="https://github.com/ChrisGalliano/Pion">Pion framework</a> / components.
     <br/>
     <br/>
-    Templating features:<br/>
+    <a href="https://github.com/ChrisGalliano/phpstorm-pion-plugin/issues">Bug tracker</a> | <a href="https://github.com/ChrisGalliano/phpstorm-pion-plugin">GitHub repo</a>
+    <br/>
+    <br/>
+
+    <h2>Features</h2>
+
+    <h3>Templating</h3>
     - Goto template usages action<br/>
     - Passed template variables completion & variables type support<br/>
     - Invalid template path inspection<br/>
